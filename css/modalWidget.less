@@ -17,6 +17,8 @@
 
 	background-color: rgba(55, 58, 71, 0.9);
 
+	z-index: 999;
+
 	&.m-show{
 		animation: ModalFade .3s forwards;
 
@@ -52,6 +54,10 @@
 			padding:20px;
 		}
 
+		& > img{
+			width: 100%;
+		}
+
 		& > svg{
 			width: 80px;
 			height: 80px;
@@ -64,10 +70,20 @@
 			margin: 20px 0;
     		font-weight: 500;
     		font-size: 1.7em;
+
+    		&:empty{
+    			display: none;
+    		}
 		}
 	}
 
 	.ModalMessage{
+		line-height: 1.6;
+
+		&:empty{
+			display: none;
+		}
+
 		input[type="text"],input[type="password"]{
 		    padding: 15px;
 		    border: 1px solid #EAEAEA;
@@ -84,6 +100,10 @@
 		margin-top:20px;
 
 		width:100%;
+
+		&:empty{
+			display: none;
+		}
 
 		button{
 			position: relative;
@@ -150,4 +170,37 @@
 		opacity: 1;
 		transform: rotate(0deg);
 	}
+}
+
+
+.m-loading{
+	position: relative;
+
+	&:after{
+		content:''!important;
+
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		height: 30px;
+		width: 30px;
+
+		border: 5px solid #aaa;
+		border-right-color:transparent;
+		border-left-color:transparent;
+		border-bottom-color:transparent;
+		border-radius: 50%;
+
+		transform:translate3d(-50%,-50%,0);
+
+		z-index: 999999;
+ 
+		animation:m-loading .5s infinite linear;
+	}
+}
+
+@keyframes m-loading{
+	0%    { transform:translate3d(-50%,-50%,0) rotate(0deg); }
+  100%  {transform:translate3d(-50%,-50%,0) rotate(360deg); }
 }

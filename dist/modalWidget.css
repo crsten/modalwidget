@@ -17,6 +17,7 @@
       -ms-flex-align: center;
           align-items: center;
   background-color: rgba(55, 58, 71, 0.9);
+  z-index: 999;
 }
 .ModalWidget.m-show {
   -webkit-animation: ModalFade .3s forwards;
@@ -56,6 +57,9 @@
     padding: 20px;
   }
 }
+.ModalWidget .ModalContent > img {
+  width: 100%;
+}
 .ModalWidget .ModalContent > svg {
   width: 80px;
   height: 80px;
@@ -69,6 +73,15 @@
   margin: 20px 0;
   font-weight: 500;
   font-size: 1.7em;
+}
+.ModalWidget .ModalContent > h1:empty {
+  display: none;
+}
+.ModalWidget .ModalMessage {
+  line-height: 1.6;
+}
+.ModalWidget .ModalMessage:empty {
+  display: none;
 }
 .ModalWidget .ModalMessage input[type="text"],
 .ModalWidget .ModalMessage input[type="password"] {
@@ -87,6 +100,9 @@
           flex-wrap: wrap;
   margin-top: 20px;
   width: 100%;
+}
+.ModalWidget .ModalButtons:empty {
+  display: none;
 }
 .ModalWidget .ModalButtons button {
   position: relative;
@@ -178,5 +194,46 @@
     opacity: 1;
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
+  }
+}
+.m-loading {
+  position: relative;
+}
+.m-loading:after {
+  content: '' !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 30px;
+  width: 30px;
+  border: 5px solid #aaa;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+  z-index: 999999;
+  -webkit-animation: m-loading 0.5s infinite linear;
+          animation: m-loading 0.5s infinite linear;
+}
+@-webkit-keyframes m-loading {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+@keyframes m-loading {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
   }
 }

@@ -15,7 +15,8 @@
 			_content		= null,
  			_color			= '#00759c',
  			_container		= document.body,
- 			_closeOnClick	= true;
+ 			_closeOnClick	= true,
+ 			_padding		= true;
 
  		var elements = {
  			content: null,
@@ -31,6 +32,8 @@
 			question: '<svg id="modal_icon" class="modal_default" x="0px" y="0px" viewBox="0 0 128 128"><path fill="{{color}}" d="M64,0C28.7,0,0,28.7,0,64s28.7,64,64,64s64-28.7,64-64S99.3,0,64,0z M62.5,98.5h-0.1c-3.4,0-5.8-2.7-5.8-6.2	c0-3.7,2.5-6.3,6-6.3s5.9,2.6,5.9,6.3C68.5,95.8,66.2,98.5,62.5,98.5z M72.2,60.8c-4.4,5.2-6,9.7-5.7,14.8l0.1,2.5h-7.8l-0.2-2.6	c-0.6-5.3,1.2-11.3,6.2-17.2c4.5-5.4,7-9.3,7-13.8c0-5.1-3.2-8.5-9.5-8.6c-3.6,0-7.6,1.2-10.1,3.1l-2.4-6.3c3.4-2.4,9-4,14.3-4	c11.5,0,16.7,7.1,16.7,14.7C80.8,50.2,77,55.2,72.2,60.8z"/></svg>',
 			info: '<svg id="modal_icon" class="modal_default" x="0px" y="0px" viewBox="0 0 128 128"><path fill="{{color}}" d="M64,0C28.7,0,0,28.7,0,64s28.7,64,64,64s64-28.7,64-64S99.3,0,64,0z M69.4,95.3h-8.8V46.9h8.8V95.3z	 M64.8,38.7c-3.1,0-5.3-2.4-5.3-5.4c0-3.1,2.3-5.5,5.5-5.5c3.3,0,5.4,2.4,5.4,5.5C70.5,36.3,68.3,38.7,64.8,38.7z"/></svg>'
 		};
+
+
 
  		function setArgs(x){
  			for(var key in x){
@@ -49,6 +52,8 @@
 
  			elements.content = document.createElement('div');
  			elements.content.className = 'ModalContent';
+
+ 			if(!_padding)elements.content.setAttribute('style','padding:0;');
 
  			initImage();
 
@@ -93,7 +98,13 @@
  			}else{
  				elements.image = document.createElement('img');
  				elements.image.setAttribute('style','color:' + _color);
- 				if(_image)elements.image.src = _image;
+ 				if(_image && elements.content){
+ 					elements.content.classList.add('m-loading');
+ 					elements.image.addEventListener('load',function(){
+ 						elements.content.classList.remove('m-loading');
+ 					});	
+ 					elements.image.src = _image;
+ 				}
  			}
 
  			if(elements.content){
@@ -119,7 +130,8 @@
  			}
  		}
 
- 		function show(){
+ 		function show(args){
+ 			setArgs(args);
  			var handler = function(){
 				that.el.classList.remove('m-show');
 				that.el.removeEventListener(whichAnimationEvent(),handler);
@@ -175,7 +187,7 @@
  					return _image;
  				},
  				set: function(x){
- 					_image = (typeof x == 'string')?x:_image;
+ 					_image = (typeof x == 'string')?x:null;
  					initImage();
  				}
  			},
@@ -184,7 +196,7 @@
  					return _title;
  				},
  				set: function(x){
- 					_title = (typeof x == 'string')?x:_title;
+ 					_title = (typeof x == 'string')?x:null;
  					if(elements.title)elements.title.innerText = _title;
  				}
  			},
@@ -193,7 +205,7 @@
  					return _content;
  				},
  				set: function(x){
- 					_content = (typeof x == 'string')?x:_content;
+ 					_content = (typeof x == 'string')?x:null;
  					if(elements.message)elements.message.innerHTML = _content;
  				}
  			},
@@ -202,10 +214,26 @@
  					return _color;
  				},
  				set: function(x){
- 					_color = (typeof x == 'string')?x:_color;
+ 					_color = (typeof x == 'string')?x:null;
  					if(elements.title && elements.image){
  						elements.title.setAttribute('style','color:' + _color);
  						elements.image.setAttribute('style','color:' + _color + ';fill:' + _color);
+ 					}
+ 				}
+ 			},
+ 			'padding': {
+ 				get: function(){
+ 					return _padding;
+ 				},
+ 				set: function(x){
+ 					_padding = (x)?true:false;
+ 					if(elements.content){
+ 						if(_padding){
+ 							elements.content.removeAttribute('style');
+ 						}else{
+ 							elements.content.setAttribute('style','padding:0;');
+ 						}
+ 						
  					}
  				}
  			},
@@ -235,7 +263,8 @@
 						_buttons = [button];
 						initButtons();
  					}else{
- 						console.log('buttons needs to be of type Array or Object');
+ 						_buttons = [];
+ 						initButtons();
  					}
  				}
  			},
