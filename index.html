@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ModalWidget</title>
+
+	<link rel="stylesheet" href="dist/modalWidget.css">
+
+	<style>
+		#demo{
+			background:#00759c;
+			font-size: 20px;
+			padding:20px;
+			border:none;
+			outline: none;
+			color:white;
+			font-family: 'Open sans';
+		}
+	</style>
+</head>
+<body>
+	<button id="demo">Modal</button>
+	<script src="dist/modalWidget.js"></script>
+
+	<script>
+	var Modal = new ModalWidget({
+		image:'success',
+		title: 'Modal test',
+		content: 'Hello this is message!',
+		color: '#00759c',
+		buttons: [
+			{
+				text: 'OK',
+				backgroundColor: '#00b600',
+				color: '#fff',
+				callback: function(){
+					console.log(this);
+				}
+			},
+			{
+				text: '3rd',
+				backgroundColor: '#b60000',
+				color: '#fff',
+				callback: function(){
+					console.log(this);
+				}
+			},
+			{
+				text: 'Cancel',
+				backgroundColor: '#ccc',
+				color: '#fff',
+				width:100,
+				callback: function(){
+					this.hide();
+				}
+			}
+		]
+	}).show();
+	var demoBtn = document.querySelector('#demo');
+		demoBtn.addEventListener('click',function(){
+			Modal.show();
+		});
+	</script>
+</body>
+</html>
