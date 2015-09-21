@@ -4,7 +4,6 @@
     "js/modalWidget.js",
     "css/modalWidget.less"
   ],
-  "version": "1.0.0",
   "authors": [
     "crsten <car.jacobsen@gmail.com>"
   ],
