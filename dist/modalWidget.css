@@ -1,15 +1,21 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+.Modal-noscroll {
+  overflow: hidden;
+}
 .ModalWidget {
   font-family: 'Raleway';
   font-size: 20px;
-  width: 100%;
   height: 100%;
-  position: absolute;
+  width: 100%;
+  position: fixed;
   top: 0;
   left: 0;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -36,10 +42,9 @@
           animation: ModalHide .2s forwards;
 }
 .ModalWidget .ModalContent {
-  min-width: 100px;
-  min-height: 100px;
   max-width: 800px;
   background-color: white;
+  overflow: auto;
   padding: 50px;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -58,11 +63,17 @@
   }
 }
 .ModalWidget .ModalContent > img {
-  width: 100%;
+  max-width: 100%;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
 }
 .ModalWidget .ModalContent > svg {
   width: 80px;
   height: 80px;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
   opacity: 0;
   -webkit-animation: ModalImage 0.2s forwards ease-out;
           animation: ModalImage 0.2s forwards ease-out;
@@ -79,6 +90,7 @@
 }
 .ModalWidget .ModalMessage {
   line-height: 1.6;
+  width: 100%;
 }
 .ModalWidget .ModalMessage:empty {
   display: none;
@@ -106,7 +118,7 @@
 }
 .ModalWidget .ModalButtons button {
   position: relative;
-  padding: 15px 20px;
+  padding: 15px;
   cursor: pointer;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
@@ -199,6 +211,16 @@
 .m-loading {
   position: relative;
 }
+.m-loading:before {
+  content: '' !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 999998;
+}
 .m-loading:after {
   content: '' !important;
   position: absolute;
@@ -206,7 +228,7 @@
   left: 50%;
   height: 30px;
   width: 30px;
-  border: 5px solid #aaa;
+  border: 5px solid #333;
   border-right-color: transparent;
   border-left-color: transparent;
   border-bottom-color: transparent;
@@ -214,8 +236,8 @@
   -webkit-transform: translate3d(-50%, -50%, 0);
           transform: translate3d(-50%, -50%, 0);
   z-index: 999999;
-  -webkit-animation: m-loading 0.5s infinite linear;
-          animation: m-loading 0.5s infinite linear;
+  -webkit-animation: m-loading 1s infinite linear;
+          animation: m-loading 1s infinite linear;
 }
 @-webkit-keyframes m-loading {
   0% {

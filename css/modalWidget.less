@@ -1,17 +1,22 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
 
+.Modal-noscroll{
+	overflow:hidden;
+}
+
 .ModalWidget{
 	font-family: 'Raleway';
 	font-size: 20px;
 
-	width:100%;
 	height: 100%;
+	width: 100%;
 
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 
 	display: flex;
+	flex-direction:column;
 	justify-content:center;
 	align-items:center;
 
@@ -36,11 +41,11 @@
 	}
 
 	.ModalContent{
-		min-width: 100px;
-		min-height: 100px;
 		max-width: 800px;
 
 		background-color:white;
+
+		overflow:auto;
 
 		padding:50px;
 
@@ -55,12 +60,14 @@
 		}
 
 		& > img{
-			width: 100%;
+		    max-width: 100%;
+    		flex-shrink: 0;
 		}
 
 		& > svg{
 			width: 80px;
 			height: 80px;
+			flex-shrink:0;
 			opacity: 0;
 			animation: ModalImage .2s forwards ease-out;
 			animation-delay: .2s;
@@ -79,6 +86,7 @@
 
 	.ModalMessage{
 		line-height: 1.6;
+		width:100%;
 
 		&:empty{
 			display: none;
@@ -107,7 +115,7 @@
 
 		button{
 			position: relative;
-			padding:15px 20px;
+			padding:15px;
 			cursor: pointer;
 			flex-grow:1;
 		    box-sizing: border-box;
@@ -176,6 +184,17 @@
 .m-loading{
 	position: relative;
 
+	&:before{
+		content:''!important;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255,255,255,0.8);
+		z-index: 999998;
+	}
+
 	&:after{
 		content:''!important;
 
@@ -186,7 +205,7 @@
 		height: 30px;
 		width: 30px;
 
-		border: 5px solid #aaa;
+		border: 5px solid #333;
 		border-right-color:transparent;
 		border-left-color:transparent;
 		border-bottom-color:transparent;
@@ -196,7 +215,7 @@
 
 		z-index: 999999;
  
-		animation:m-loading .5s infinite linear;
+		animation:m-loading 1s infinite linear;
 	}
 }
 

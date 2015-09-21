@@ -1,0 +1,32 @@
+{
+  "name": "modalwidget",
+  "main": [
+    "js/modalWidget.js",
+    "css/modalWidget.less"
+  ],
+  "version": "1.0.0",
+  "authors": [
+    "crsten <car.jacobsen@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://crsten@bitbucket.org/crsten/modalwidget.git"
+  }
+  "description": "simple flexbox modal",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "js",
+    "modal",
+    "flexbox"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

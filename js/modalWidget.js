@@ -59,11 +59,11 @@
 
  			elements.title = document.createElement('h1');
  			elements.title.setAttribute('style','color:' + _color);
- 			elements.title.innerHTML = _title;
+ 			elements.title.innerHTML = (_title)?_title:'';
 
  			elements.message = document.createElement('div');
  			elements.message.className = 'ModalMessage';
- 			elements.message.innerHTML = _content;
+ 			elements.message.innerHTML = (_content)?_content:'';
 
  			elements.buttons = document.createElement('div');
  			elements.buttons.className = 'ModalButtons';
@@ -108,7 +108,7 @@
  			}
 
  			if(elements.content){
- 				elements.content.insertBefore(elements.image,elements.content.childNodes[0]);
+ 				elements.content.insertBefore(elements.image,(elements.content.hasChildNodes())?elements.content.childNodes[0]:null);
  			}
  		}
 
@@ -131,6 +131,7 @@
  		}
 
  		function show(args){
+ 			document.body.classList.add('Modal-noscroll');
  			setArgs(args);
  			var handler = function(){
 				that.el.classList.remove('m-show');
@@ -145,6 +146,7 @@
  		}
 
  		function hide(){
+ 			document.body.classList.remove('Modal-noscroll');
  			var handler = function(){
  				that.el.classList.remove('m-hide');
  				that.container.removeChild(that.el);
@@ -196,8 +198,8 @@
  					return _title;
  				},
  				set: function(x){
- 					_title = (typeof x == 'string')?x:null;
- 					if(elements.title)elements.title.innerText = _title;
+ 					_title = (typeof x == 'string')?x:'';
+ 					if(elements.title)elements.title.innerHTML = _title;
  				}
  			},
  			'content': {
@@ -205,7 +207,7 @@
  					return _content;
  				},
  				set: function(x){
- 					_content = (typeof x == 'string')?x:null;
+ 					_content = (typeof x == 'string')?x:'';
  					if(elements.message)elements.message.innerHTML = _content;
  				}
  			},
@@ -235,6 +237,11 @@
  						}
  						
  					}
+ 				}
+ 			},
+ 			'open':{
+ 				get: function(){
+ 					return that.container.contains(that.el);
  				}
  			},
  			'buttons': {
@@ -303,4 +310,6 @@
 	}
 
  	window.ModalWidget = ModalWidget;
+
+ 	module.exports = ModalWidget;
  })();

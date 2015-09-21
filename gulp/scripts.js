@@ -16,5 +16,5 @@ gulp.task('js',function(){
 });
 
 gulp.task('watch:js',['js'],function(){
-	gulp.watch('js/modalWidget.js',['js']);
+	gulp.watch('js/modalWidget*.js',['js']);
 });

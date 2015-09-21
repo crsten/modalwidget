@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ModalWidget</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 	<link rel="stylesheet" href="dist/modalWidget.css">
 
@@ -21,26 +22,17 @@
 <body>
 	<button id="demo">Modal</button>
 	<script src="dist/modalWidget.js"></script>
-
+	
 	<script>
 	var Modal = new ModalWidget({
-		image:'http://www.ricoh-imaging.co.jp/english/r_dc/caplio/r7/img/sample_04.jpg',
-		padding:false
-		/*title: 'Modal test',
-		content: 'Hello this is message!',
+		image:'question',
+		title: 'Remember to save!',
+		content: "You haven't saved your changes yet! Do you want to do it now?",
 		color: '#00759c',
 		buttons: [
 			{
-				text: 'OK',
-				backgroundColor: '#00b600',
-				color: '#fff',
-				callback: function(){
-					console.log(this);
-				}
-			},
-			{
-				text: '3rd',
-				backgroundColor: '#b60000',
+				text: 'Save now',
+				backgroundColor: '#00759c',
 				color: '#fff',
 				callback: function(){
 					console.log(this);
@@ -50,12 +42,11 @@
 				text: 'Cancel',
 				backgroundColor: '#ccc',
 				color: '#fff',
-				width:100,
 				callback: function(){
 					this.hide();
 				}
 			}
-		]*/
+		]
 	}).show();
 	var demoBtn = document.querySelector('#demo');
 		demoBtn.addEventListener('click',function(){

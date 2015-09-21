@@ -1,6 +1,6 @@
 {
-  "name": "ModalWidget",
-  "version": "1.0.0",
+  "name": "modalwidget",
+  "version": "1.0.1",
   "description": "simple modal widget",
   "main": "index.js",
   "scripts": {
