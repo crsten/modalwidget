@@ -10,8 +10,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://crsten@bitbucket.org/crsten/modalwidget.git"
-  }
+    "url": "https://github.com/crsten/modalwidget.git"
+  },
   "description": "simple flexbox modal",
   "moduleType": [
     "globals"
